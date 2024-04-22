@@ -1,0 +1,7 @@
+1. Use bootstrap to make your design elegant 
+https://getbootstrap.com/
+
+2. Make login design
+3. make your route protected
+4. Avoid user to click back button in a browser
+if authenticated use will always redirect to home page

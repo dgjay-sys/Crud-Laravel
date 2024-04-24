@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -19,6 +18,28 @@
 </head>
 
 <body>
+    {{-- <div class="container text-center">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col align-self-center" style="border: 1px solid black;">
+                <form action="{{ route('insert') }}" method="post">
+                    @csrf {{ csrf_field() }}
+
+                    <div class="form-outline mb-4 ">
+                        <label for="fname" class="form-label">name</label>
+                        <input type="text" class="form-control" name="fname">
+                    </div>
+
+                    <label for="username">username</label>
+                    <input type="text" name="username">
+                    <label for="password">password</label>
+                    <input type="password" name="password">
+                    <button type="submit">Insert</button>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div> --}}
     <section class="vh-100">
         <div class="container-fluid">
             <div class="row">
@@ -28,10 +49,27 @@
                                 id="laraicon" alt=""></span>
                     </div>
                     <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 pt-5 pt-xl-0 mt-xl-n5">
-                        <form style="width: 23rem;" action="/loginuser" method="post">
+                        <form style="width: 23rem;" action="{{route('insert')}}" method="post">
                             @csrf {{ csrf_field() }}
 
-                            <h3 class="pb-3 loginHeader">SIGN IN</h3>
+                            <h3 class="pb-3 loginHeader">SIGN UP</h3>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="fName">First Name: </label>
+                                        <input type="text" name="fName" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="lName">Last Name: </label>
+                                        <input type="text" name="lName" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="username">Username: </label>
                                 <input type="text" name="username" class="form-control" />
@@ -41,9 +79,9 @@
                                 <input type="password" name="password" class="form-control " />
                             </div>
                             <div class="pt-1 mb-4">
-                                <button class="btn btnLog" type="submit">Login</button>
+                                <button class="btn btnLog" type="submit">Sign Up</button>
                             </div>
-                            <p>Don't have an account? <a href="{{ route('regis') }}" class="link-info">Register here</a>
+                            <p> have an account? <a href="{{ route('login') }}" class="link-info">Login here</a>
                             </p>
                         </form>
                     </div>
@@ -56,6 +94,7 @@
             </div>
         </div>
     </section>
+
 </body>
 
 </html>

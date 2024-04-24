@@ -33,7 +33,7 @@
                 @foreach ($name as $key => $data)
                     <tr>
                         <td>{{ $data->user_id }}</td>
-                        <td>{{ $data->user_name }}</td>
+                        <td>{{ $data->fname }}</td>
                         <td>{{ $data->username }}</td>
                         <td>
                             <form action="/delete/{{ $data->user_id }}" method="POST">

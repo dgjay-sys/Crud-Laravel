@@ -18,19 +18,24 @@ class UserController extends Controller
 
     public function createUser(Request $request)
     {
-        $name = $request->input('user_name');
+        $fName = $request->input('fName');
+        $lName = $request->input('lName');
+        $name = $fName . " " . $lName;
         $username = $request->input('username');
-        $hashpassword = Hash::make('password');
+        $hashpassword = $request->input('password');
+
         User::create([
-            'user_name' => $name,
+            'fname' => $name,
             'username' => $username,
             'password' => $hashpassword
         ]);
-        return redirect()->route('show');    }
 
-    public function readUsers(): View
+        return redirect()->route('login');
+    }
+
+    public function readUsers()
     {
-        $users = User::select('user_id', 'user_name', 'username')->get();
+        $users = User::select('user_id', 'fname', 'username')->get();
         return view('showuser', ['name' => $users]);
     }
 
@@ -38,11 +43,10 @@ class UserController extends Controller
 
     public function updateUser(Request $request, $id)
     {
-        $name = $request -> input('user_name');
-        $username = $request -> input('username');
-        $password = $request -> input('password'); 
-        
-        User::where('user_id' , $id)->update($request->all());
+        $name = $request->input('user_name');
+        $username = $request->input('username');
+        $password = $request->input('password');
+        User::where('user_id', $id)->update($request->all());
     }
 
     public function deleteUser($id)

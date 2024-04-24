@@ -1,0 +1,36 @@
+
+#laraicon {
+    height: 50px;
+    width: 50px;
+}
+.bg-image-vertical {
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: auto 100%;
+}
+.btnLog {
+    background-color: #ff5733;
+    font-size: small;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    color: white;
+}
+.btnLog:hover {
+    font-size: medium;
+    font-weight: bolder;
+    color: white;
+}   
+
+.loginHeader {
+    font-size: xx-large;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    color: #ff5733;
+    text-align: center;
+}
+
+@media (min-width: 1025px) {
+    .h-custom-2 {
+        height: 90%;
+    }
+}

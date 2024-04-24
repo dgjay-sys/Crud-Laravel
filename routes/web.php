@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,12 +22,43 @@ Route::get('', function () {
 
 Route::get('/', function () {
     return view('login');
+})->name('login');
+
+
+Route::controller(LoginController::class)->group(function () {
+    Route::post('/loginuser', 'isLogin')->middleware('alreadyLoggedIn');
+    Route::get('/dashboard', 'dashboard')->middleware('isLoggedIn');
+    Route::get('/logout', 'logout')->middleware('prevent-back-history');
 });
 
-Route::get('/showusers', [UserController::class, 'readUsers'])->name('show');
-Route::post('/insertuser', [UserController::class, 'createUser'])->name('insert');
-Route::post('/delete/{id}', [UserController::class, 'deleteUser']);
-Route::get('/update/{id}', function ($id) {
-    return view('update' , ['id' => $id ]);
+Route::group(['middleware' => 'prevent-back-history'], function () {
+    Auth::routes();
+    Route::get('/', function () {
+        return view('login');
+    })->name('login');
 });
-Route::post('/update/{id}', [UserController::class, 'updateUser']);
+
+Route::middleware('isLoggedIn')->group(function () {
+
+    //POST ACTION
+    Route::post('/update/{id}', [UserController::class, 'updateUser']);
+    Route::post('/delete/{id}', [UserController::class, 'deleteUser']);
+
+
+    //GET ACTION
+    Route::get('/showusers', [UserController::class, 'readUsers'])->name('show');
+});
+
+
+Route::middleware('guest')->group(function () {
+    Route::get('/registeruser', function () {
+        return view('register');
+    })->name('regis');
+    Route::get('', function () {
+        return view('welcome');
+    });
+    Route::get('/', function () {
+        return view('login');
+    })->name('login');
+    Route::post('/insertuser', [UserController::class, 'createUser'])->name('insert');
+});

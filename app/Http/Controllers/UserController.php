@@ -43,10 +43,10 @@ class UserController extends Controller
 
     public function updateUser(Request $request, $id)
     {
-        $name = $request->input('user_name');
+        $name = $request->input('fname');
         $username = $request->input('username');
-        $password = $request->input('password');
         User::where('user_id', $id)->update($request->all());
+        return redirect()->route('show');
     }
 
     public function deleteUser($id)
@@ -54,12 +54,5 @@ class UserController extends Controller
         User::where('user_id', $id)->delete();
 
         return Redirect::back()->with('message', 'Operation Successful !');
-    }
-
-    public function checkDB()
-    {
-        $db = DB::connection();
-        $db->query('SHOW DATABASES');
-        dd($db);
     }
 }

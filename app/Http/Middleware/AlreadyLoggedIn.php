@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AlreadyLoggedIn
@@ -13,9 +14,9 @@ class AlreadyLoggedIn
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, $guard = null): Response
     {
-       if(Session()->has('loginId') && (url('login') == $request->url() || url('registration') == $request->url())){
+        if (Session()->has('loginId') && (url('login') == $request->url() || url('registration') == $request->url())) {
             return back();
         }
         return $next($request);

@@ -13,12 +13,10 @@
     
     <form action="/update/{{$id}}" method="post">
         @csrf {{ csrf_field() }}
-        <label for="user_name">name</label>
-        <input type="text" name="user_name">
+        <label for="fname">name</label>
+        <input type="text" name="fname">
         <label for="username">username</label>
         <input type="text" name="username">
-        <label for="password">password</label>
-        <input type="password" name="password">
         <button type="submit">Update</button>
     </form>
 </body>

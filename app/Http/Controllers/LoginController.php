@@ -12,21 +12,20 @@ use Illuminate\Support\Facades\Redirect;
 class LoginController extends Controller
 {
 
+    public function showLoginForm()
+    {   
+        return view('login');
+    }
+
+
     public function isLogin(Request $request)
     {
-
-        // $request->validate([
-        //     'username' => ['required', 'string'],
-        //     'password' => ['required', 'string'],
-        // ]);
-        //dd($request->username);
         $username = $request->username;
         $password = $request->password;
 
         $result = User::where('username', '=', $username)->first();
         if ($result) {
             if (Hash::check($request->password, $result->password)) {
-
                 $request->session()->put('loginId', $result->user_id);
                 return redirect('/dashboard');
             } else {
@@ -43,8 +42,8 @@ class LoginController extends Controller
         $data = array();
         if (session()->has('loginId')) {
             $data = User::where('user_id', '=', session('loginId'))->first();
+            return view('dashboard', compact('data'));
         }
-        return view('dashboard', compact('data'));
     }
 
     public function logout()
@@ -52,7 +51,7 @@ class LoginController extends Controller
         $data = array();
         if (session()->has('loginId')) {
             session()->pull('loginId');
-            return redirect('/');
+            return redirect('/login');
         }
     }
 }
